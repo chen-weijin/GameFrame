@@ -1,0 +1,16 @@
+{
+    "name": "ImageCropper.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1c5dca4f6a8153f43b78c725b668c70d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

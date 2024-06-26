@@ -120,14 +120,14 @@ public static class RectTransformExtension
         var cameraObj = GameObject.Find("UICamera");
         if (cameraObj == null)
         {
-            NGDebug.LogWarning($"GetDesignPosition 未找到UI相机对象");
+            Debug.LogWarning($"GetDesignPosition 未找到UI相机对象");
             return Vector2.zero;
         }
 
         var uiCamera = cameraObj.GetComponent<Camera>();
         if (uiCamera == null)
         {
-            NGDebug.LogWarning($"GetDesignPosition 未找到UI相机组件");
+            Debug.LogWarning($"GetDesignPosition 未找到UI相机组件");
             return Vector2.zero;
         }
 

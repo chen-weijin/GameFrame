@@ -177,22 +177,22 @@ public static class MonoBehaviourExtension
     /// <param name="transform"></param>
     /// <param name="root"></param>
     /// <returns></returns>
-    public static Sequence CreateTweenGraphSequence(this Transform transform, DORootNode root)
-    {
-        var sequence = DOTween.Sequence();
-        var tweenNode = root.GetOutputPort("next").Connection.node as DOBaseNode;
-        while (tweenNode != null)
-        {
-            var tween = tweenNode.GenerateTween(transform);
-            if (tween != null)
-            {
-                sequence.Append(tween);
-            }
-            tweenNode = tweenNode.GetNextNode();
-        }
-        sequence.SetTarget(transform.gameObject);
-        sequence.SetLink(transform.gameObject);
-        sequence.SetAutoKill(true);
-        return sequence;
-    }
+    //public static Sequence CreateTweenGraphSequence(this Transform transform, DORootNode root)
+    //{
+    //    var sequence = DOTween.Sequence();
+    //    var tweenNode = root.GetOutputPort("next").Connection.node as DOBaseNode;
+    //    while (tweenNode != null)
+    //    {
+    //        var tween = tweenNode.GenerateTween(transform);
+    //        if (tween != null)
+    //        {
+    //            sequence.Append(tween);
+    //        }
+    //        tweenNode = tweenNode.GetNextNode();
+    //    }
+    //    sequence.SetTarget(transform.gameObject);
+    //    sequence.SetLink(transform.gameObject);
+    //    sequence.SetAutoKill(true);
+    //    return sequence;
+    //}
 }
