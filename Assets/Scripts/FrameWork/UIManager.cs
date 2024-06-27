@@ -99,7 +99,7 @@ namespace framework
             if (canvas != null)
             {
                 canvas.overrideSorting = true;
-                canvas.sortingLayerName = "View";
+                //canvas.sortingLayerName = "View";
                 canvas.sortingOrder = order;
             }
         }
