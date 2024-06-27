@@ -8,7 +8,7 @@ namespace game
 {
     public class XTestButton : MonoBehaviour
     {
-        public const string Prefab_Path = "btn";
+        public const string Prefab_Path = "prefabs/btn";
         public const string Prefab_Name = "TestBtn";
 
         private Action _clickHandle;

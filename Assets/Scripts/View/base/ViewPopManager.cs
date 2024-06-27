@@ -28,7 +28,7 @@ public class ViewPopManager : Singleton<ViewPopManager>
     {
         var lastPop = _list[_list.Count - 1];
         _list.RemoveAt(_list.Count - 1);
-        lastPop._DestroyByHide();
+        lastPop.DestroyByHide();
         UIManager.SetSortingOrder(lastPop, _popIndexStart);
 
         _Sort();
@@ -46,7 +46,8 @@ public class ViewPopManager : Singleton<ViewPopManager>
     /// </summary>
     public void PullAll()
     {
-        _DelBlack();
+        _black.DestroyMe();
+        _black = null;
 
         for (var i = 0; i < _list.Count; i++)
         {
@@ -59,16 +60,22 @@ public class ViewPopManager : Singleton<ViewPopManager>
     /// </summary>
     private void _Sort()
     {
+        //处理遮罩
         if(_list.Count == 0)
         {
-            _DelBlack();
+            _black.DestroyMe();
+            _black = null;
         }
         else
         {
-            _AddBlack();
+            if (_black != null) return;
+            _black = BlackMask.Create();
+            _black.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
+            _black.EnsureComponent<Canvas>();
+            _black.EnsureComponent<GraphicRaycaster>();
             UIManager.SetSortingOrder(_black, _popIndexStart + _list.Count - 1);
         }
-
+        //处理窗口
         for(var i = 0; i < _list.Count; i++)
         {
             var idx = _popIndexStart + i;
@@ -86,26 +93,6 @@ public class ViewPopManager : Singleton<ViewPopManager>
                 _list[i].Show();
             }
         }
-    }
-    /// <summary>
-    /// 遮罩处理
-    /// </summary>
-    private void _AddBlack()
-    {
-        if (_black != null) return;
-        _black = BlackMask.Create();
-        _black.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
-        _black.EnsureComponent<Canvas>();
-        _black.EnsureComponent<GraphicRaycaster>();
-    }
-
-    /// <summary>
-    /// 遮罩处理
-    /// </summary>
-    private void _DelBlack()
-    {
-        _black.DestroyMe();
-        _black = null;
     }
 
 }

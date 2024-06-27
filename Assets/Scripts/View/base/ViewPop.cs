@@ -1,6 +1,4 @@
-using game;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ViewPop : MonoBehaviour
@@ -24,17 +22,57 @@ public class ViewPop : MonoBehaviour
         if (_isShow == true) return;
         _isShow = true;
 
-        gameObject.SetActive(true);
-        gameObject.GetRectTransform().SetScale(0);
-        _shAct?.Stop();
-        _shAct = gameObject.GetRectTransform().BeginAction()
-            .ScaleTo(0.2f, 1,DG.Tweening.Ease.OutBack)
-            .Run();
+        ShowAni();
     }
     public void Hide()
     {
         if (_isShow == false) return;
         _isShow = false;
+
+        HideAni();
+    }
+    public void DestroyFlash()
+    {
+        Destroy(gameObject);
+    }
+    public void DestroyByHide()
+    {
+        if (_isClose == true) return;
+        _isClose = true;
+
+        HideAni(() =>
+        {
+            Destroy(gameObject);
+        });
+    }
+
+
+    protected void _Close()
+    {
+        if (_isClose == true) return;
+        _isClose = true;
+
+        ViewPopManager.Instance.Pull();
+    }
+    /// <summary>
+    /// ÏÔÊ¾¶¯»­
+    /// </summary>
+    /// <param name="endAct"></param>
+    protected virtual void ShowAni(Action endAct = null)
+    {
+        gameObject.SetActive(true);
+        gameObject.GetRectTransform().SetScale(0);
+        _shAct?.Stop();
+        _shAct = gameObject.GetRectTransform().BeginAction()
+            .ScaleTo(0.2f, 1, DG.Tweening.Ease.OutBack)
+            .Run();
+    }
+    /// <summary>
+    /// Òþ²Ø¶¯»­
+    /// </summary>
+    /// <param name="endAct"></param>
+    protected virtual void HideAni(Action endAct = null)
+    {
 
         gameObject.SetActive(true);
         gameObject.GetRectTransform().SetScale(1);
@@ -44,34 +82,8 @@ public class ViewPop : MonoBehaviour
             .CallFunc(() =>
             {
                 gameObject.SetActive(false);
+                if (endAct != null) endAct();
             })
             .Run();
-    }
-    public void DestroyFlash()
-    {
-        Destroy(gameObject);
-        //_DestroyByHide();
-    }
-    public void _DestroyByHide()
-    {
-        if (_isClose == true) return;
-        _isClose = true;
-
-        gameObject.SetActive(true);
-        gameObject.GetRectTransform().SetScale(1);
-        _shAct?.Stop();
-        _shAct = gameObject.GetRectTransform().BeginAction()
-            .ScaleTo(0.2f, 0)
-            .CallFunc(() =>
-            {
-                Destroy(gameObject); //ViewPopManager.Instance.Pull();
-            })
-            .Run();
-    }
-
-
-    protected void _Close()
-    {
-        ViewPopManager.Instance.Pull();
     }
 }
