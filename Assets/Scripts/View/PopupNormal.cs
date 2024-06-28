@@ -1,19 +1,18 @@
 using framework;
 using UnityEngine.UI;
 
-public class ViewPopNormal : ViewPop
+public class PopupNormal : PopupBase
 {
     public const string Prefab_Path = "prefabs/panel_normal";
-    public const string Prefab_Name = "panel_normal";
 
-    public static ViewPopNormal Create()
-    {
-        var mo = UIManager.CreateLayer<ViewPopNormal>();
-        ViewPopManager.Instance.Push(mo);
-        mo.CloseType = 0;
-        mo.HideType = 0;
-        return mo;
-    }
+    //public static PopupNormal Create()
+    //{
+    //    var mo = UIManager.CreateLayer<PopupNormal>();
+    //    PopupMgr.Instance.Push(mo);
+    //    mo.CloseType = 0;
+    //    mo.HideType = 0;
+    //    return mo;
+    //}
 
     protected override void Start()
     {

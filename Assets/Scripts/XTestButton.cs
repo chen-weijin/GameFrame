@@ -16,7 +16,6 @@ namespace game
         public static XTestButton Create(Action act)
         {
             var btn = UIManager.CreateObject<XTestButton>();
-            btn.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas());
             btn.SetClickHandle(act);
             return btn;
         }

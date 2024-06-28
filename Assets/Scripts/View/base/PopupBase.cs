@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ViewPop : MonoBehaviour
+public class PopupBase : MonoBehaviour
 {
     //0:非激活状态下隐藏 1:任何时候都不隐藏
     protected int _hideType = 0;
@@ -49,10 +49,7 @@ public class ViewPop : MonoBehaviour
 
     protected void _Close()
     {
-        if (_isClose == true) return;
-        _isClose = true;
-
-        ViewPopManager.Instance.Pull();
+        PopupMgr.Instance.Pull(this);
     }
     /// <summary>
     /// 显示动画

@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ViewPopManager : Singleton<ViewPopManager>
+public class PopupMgr : Singleton<PopupMgr>
 {
-    private List<ViewPop> _list = new List<ViewPop>();
+    private List<PopupBase> _list = new List<PopupBase>();
     private int _popIndexStart = 100;
     private BlackMask _black;
     /// <summary>
     /// 打开窗口
     /// </summary>
     /// <param name="view"></param>
-    public void Push(ViewPop view)
+    public void Push(PopupBase view)
     {
         _list.Add(view);
         view.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(),false);
-        view.EnsureComponent<Canvas>();
-        view.EnsureComponent<GraphicRaycaster>();
 
         _Sort();
     }
     /// <summary>
     /// 关闭最后一个窗口
     /// </summary>
-    public void Pull()
+    public void Pull(PopupBase popup = null)
     {
         var lastPop = _list[_list.Count - 1];
+        if (popup != lastPop) return;
         _list.RemoveAt(_list.Count - 1);
         lastPop.DestroyByHide();
         UIManager.SetSortingOrder(lastPop, _popIndexStart);
@@ -68,12 +67,14 @@ public class ViewPopManager : Singleton<ViewPopManager>
         }
         else
         {
-            if (_black != null) return;
-            _black = BlackMask.Create();
-            _black.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
-            _black.EnsureComponent<Canvas>();
-            _black.EnsureComponent<GraphicRaycaster>();
-            UIManager.SetSortingOrder(_black, _popIndexStart + _list.Count - 1);
+            if (_black == null)
+            {
+                _black = BlackMask.Create();
+                _black.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
+                _black.EnsureComponent<Canvas>();
+                _black.EnsureComponent<GraphicRaycaster>();
+                UIManager.SetSortingOrder(_black, _popIndexStart + _list.Count - 1);
+            }
         }
         //处理窗口
         for(var i = 0; i < _list.Count; i++)

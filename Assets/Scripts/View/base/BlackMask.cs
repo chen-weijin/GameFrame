@@ -17,7 +17,7 @@ public class BlackMask : MonoBehaviour
     {
         gameObject.GetComponent<Button>().onClick.AddListener(() =>
         {
-            ViewPopManager.Instance.PullByMask();
+            PopupMgr.Instance.PullByMask();
         });
     }
     public void DestroyMe()

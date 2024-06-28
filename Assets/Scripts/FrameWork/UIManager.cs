@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace framework
 {
@@ -8,6 +9,85 @@ namespace framework
     /// </summary>
     public  class UIManager : MonoSingleton<UIManager>
     {
+
+
+        public static T CreateObject<T>() where T : MonoBehaviour
+        {
+            var prefabPath = GetPrefabPath<T>();
+            var prefabName = typeof(T).Name;
+            T go = CreateObject<T>(prefabPath);
+            go.name = prefabName;
+            return go;
+        }
+
+        public static GameObject CreateObject(string prefabPath)
+        {
+            var go = InstantiatePrefab(prefabPath);
+            go.name = go.name.Replace("(Clone)", "");
+            return go;
+        }
+        public static T CreateEmptyObject<T>() where T : MonoBehaviour
+        {
+            var go = new GameObject();
+            go.AddComponent<RectTransform>();
+            go.name = typeof(T).Name;
+            return go.AddComponent<T>();
+        }
+
+        public static T CreateLayer<T>() where T : MonoBehaviour
+        {
+            var prefabPath = GetPrefabPath<T>();
+            var prefabName = typeof(T).Name;
+            var com = CreateObject<T>(prefabPath);
+            com.name = prefabName;
+
+            SetFullScreen(com);
+            return com;
+        }
+
+        public static T CreateEmptyLayer<T>() where T : MonoBehaviour
+        {
+            var com = CreateEmptyObject<T>();
+            com.name = typeof(T).Name;
+
+            SetFullScreen(com);
+            return com;
+        }
+
+        public static void SetSortingOrder(MonoBehaviour layer, int order)
+        {
+            if (order < 0) return;
+            var canvas = layer.EnsureComponent<Canvas>();
+            layer.EnsureComponent<GraphicRaycaster>();
+
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = order;
+        }
+        private static void SetFullScreen(MonoBehaviour layer)
+        {
+            var rect = layer.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0, 0);
+            rect.anchorMax = new Vector2(1, 1);
+            rect.offsetMin = new Vector2(0, 0);
+            rect.offsetMax = new Vector2(0, 0);
+        }
+
+
+        private static T CreateObject<T>(string prefabPath) where T : MonoBehaviour
+        {
+
+            var go = InstantiatePrefab(prefabPath);
+            go.name = go.name.Replace("(Clone)", "");
+
+
+            T r = go.GetComponent<T>();
+            if (r != null)
+            {
+                return r;
+            }
+            return go.AddComponent<T>();
+        }
+
         // 假设预制体位于名为"Resources/Prefabs"的文件夹中
         public static GameObject InstantiatePrefab(string prefabPath)
         {
@@ -24,90 +104,7 @@ namespace framework
             return Instantiate(prefab);
         }
 
-
-        public static T CreateObject<T>() where T : MonoBehaviour
-        {
-            var prefabPath = GetPrefabPath<T>();
-            var prefabName = GetPrefabName<T>();
-            T go = CreateObject<T>(prefabPath);
-            go.name = prefabName;
-            return go;
-        }
-
-        private static T CreateObject<T>(string prefabPath) where T : MonoBehaviour
-        {
-
-            var go = InstantiatePrefab(prefabPath);
-            go.name = go.name.Replace("(Clone)", "");
-
-
-            T r = go.GetComponent<T>();
-            if (r != null)
-            {
-                return r;
-            }
-            return go.AddComponent<T>();
-        }
-        public static GameObject CreateObject(string prefabPath)
-        {
-            var go = InstantiatePrefab(prefabPath);
-            go.name = go.name.Replace("(Clone)", "");
-            return go;
-        }
-        public static T CreateEmptyObject<T>() where T : MonoBehaviour
-        {
-            var go = new GameObject();
-            go.AddComponent<RectTransform>();
-            go.name = typeof(T).Name;
-            return go.AddComponent<T>();
-        }
-
-        /// <summary>
-        /// 创建全屏UI，默认自动设置父节点到GameUIRoot下
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="order">canvas的sortingOrder</param>
-        /// <param name="parent">指定父节点</param>
-        /// <returns></returns>
-        public static T CreateLayer<T>(int order = -1, Transform parent = null) where T : MonoBehaviour
-        {
-            var prefabPath = GetPrefabPath<T>();
-            var prefabName = GetPrefabName<T>();
-            var com = CreateObject<T>(prefabPath);
-            com.name = prefabName;
-            if (com == null)
-            {
-                Debug.Log("CreateLayer com is null");
-                return null;
-            }
-
-            if(parent != null)
-            {
-                com.gameObject.transform.SetParent(parent, false);
-            }
-
-            if(order > -1)
-            {
-                SetSortingOrder(com, order);
-            }
-            return com;
-        }
-
-        public static void SetSortingOrder(MonoBehaviour layer, int order)
-        {
-            var canvas = layer.GetComponent<Canvas>();
-            if (canvas != null)
-            {
-                canvas.overrideSorting = true;
-                //canvas.sortingLayerName = "View";
-                canvas.sortingOrder = order;
-            }
-        }
-
-
-
         private const string Prefab_Path_Key = "Prefab_Path";
-        private const string Prefab_Name_Key = "Prefab_Name";
         private static string GetPrefabPath<T>()
         {
             var type = typeof(T);
@@ -127,26 +124,6 @@ namespace framework
             }
 
             return prefabPath;
-        }
-        private static string GetPrefabName<T>()
-        {
-            var type = typeof(T);
-            var prefabNameField = type.GetField(Prefab_Name_Key);
-
-            if (prefabNameField == null)
-            {
-                Debug.LogError($"类{type}未定义常量变量Prefab_Path，请检查代码");
-                return string.Empty;
-            }
-
-            var prefabName = prefabNameField.GetValue("") as string;
-            if (string.IsNullOrEmpty(prefabName))
-            {
-                Debug.LogError($"类{type} Prefab_Path值为空，请检查代码");
-                return string.Empty;
-            }
-
-            return prefabName;
         }
 
         //public static Transform GetScene3DLayer()
