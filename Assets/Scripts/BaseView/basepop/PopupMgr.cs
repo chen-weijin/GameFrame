@@ -69,10 +69,8 @@ public class PopupMgr : Singleton<PopupMgr>
         {
             if (_black == null)
             {
-                _black = BlackMask.Create();
+                _black = UIManager.CreateLayer<BlackMask>();
                 _black.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
-                _black.EnsureComponent<Canvas>();
-                _black.EnsureComponent<GraphicRaycaster>();
                 UIManager.SetSortingOrder(_black, _popIndexStart + _list.Count - 1);
             }
         }

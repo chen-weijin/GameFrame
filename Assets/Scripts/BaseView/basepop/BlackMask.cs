@@ -7,12 +7,6 @@ public class BlackMask : MonoBehaviour
     public const string Prefab_Path = "prefabs/bg_hei";
     public const string Prefab_Name = "panel_black";
 
-    public static BlackMask Create()
-    {
-        var mo = UIManager.CreateLayer<BlackMask>();
-
-        return mo;
-    }
     private void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(() =>

@@ -66,10 +66,10 @@ namespace framework
         private static void SetFullScreen(MonoBehaviour layer)
         {
             var rect = layer.GetComponent<RectTransform>();
-            rect.anchorMin = new Vector2(0, 0);
-            rect.anchorMax = new Vector2(1, 1);
-            rect.offsetMin = new Vector2(0, 0);
-            rect.offsetMax = new Vector2(0, 0);
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
         }
 
 
@@ -126,11 +126,6 @@ namespace framework
             return prefabPath;
         }
 
-        //public static Transform GetScene3DLayer()
-        //{
-        //    var uiGroup = (UIGroup)Instance.GetUIGroup(UIGroupLayer.scene3DLayer.ToString());
-        //    return uiGroup.Helper.transform;
-        //}
 
         public static Transform GetRootCanvas()
         {

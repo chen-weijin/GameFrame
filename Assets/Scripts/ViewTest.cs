@@ -9,9 +9,11 @@ using WLMain;
 public class ViewTest : MonoBehaviour
 {
     private int _index = 0;
-    private void _CreateTestBtn(Action act)
+    private void _CreateTestBtn(string name,Action act)
     {
-        var btn = XTestButton.Create(act);
+        var btn = UIManager.CreateObject<XTestButton>();
+        btn.SetClickHandle(act);
+        btn.SetName(name);
         btn.GetComponent<RectTransform>().SetParent(gameObject.GetRectTransform());
         var size = UIManager.GetRootCanvas().GetComponent<RectTransform>().GetContentSize();
         int indexMax = ((int)(size.x / btn.GetComponent<RectTransform>().sizeDelta.x)) - 1;
@@ -22,26 +24,39 @@ public class ViewTest : MonoBehaviour
     }
     void Start()
     {
-        _CreateTestBtn(() => {
+        _CreateTestBtn("吐丝",() => {
             GameUIMgr.Instance.Spin("测试测试!!!!");
         });
-        _CreateTestBtn(() => {
+        _CreateTestBtn("注册事件",() => {
             Ntfy.Instance.Add("test", (string str) => {
                 Debug.Log(str);
             });
         });
-        _CreateTestBtn(() => {
+        _CreateTestBtn("放送事件",() => {
             Ntfy.Instance.Post("test", "hahaha");
         });
-        _CreateTestBtn(() => {
+        _CreateTestBtn("弹窗", () => {
             GameUIMgr.Instance.PopNormal();
+        });
+        _CreateTestBtn("音效", () => {
+            AudioMgr.Instance.PlayEffect("audio/effect/lineBomb2");
+        });
+        _CreateTestBtn("写缓存", () => {
+            CacheMgr.GetInstance().SetItem("test", "ffff");
+        });
+        _CreateTestBtn("读缓存", () => {
+            string str = CacheMgr.GetInstance().GetItem("test");
+            Debug.Log(str);
         });
         //吐丝 //已完成
         //事件机制 //已完成
         //弹窗 //已完成
         //列表
         //网络
-        //
+
+        //音效 //已完成
+        //数值配置
+        //本地缓存 //已完成
     }
 
 }

@@ -13,12 +13,6 @@ namespace game
 
         private Action _clickHandle;
 
-        public static XTestButton Create(Action act)
-        {
-            var btn = UIManager.CreateObject<XTestButton>();
-            btn.SetClickHandle(act);
-            return btn;
-        }
         private void Start()
         {
             gameObject.GetComponent<Button>().onClick.AddListener(_OnClick);
@@ -26,6 +20,10 @@ namespace game
         public void SetClickHandle(Action act)
         {
             _clickHandle = act;
+        }
+        public void SetName(string str)
+        {
+            gameObject.FindInChildren("txt").GetComponent<Text>().text = str;
         }
 
         private void _OnClick()
