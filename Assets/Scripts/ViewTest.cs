@@ -53,7 +53,7 @@ public class ViewTest : MonoBehaviour
             for(var i = 0; i < data.Count; i++)
             {
                 var d = data[i];
-                Debug.Log("属性: "+d.Name+"__" +d.Age + "__" + d.Score; // Debug.Log(f.Name);
+                Debug.Log("属性: "+d.Name+"__" +d.Age + "__" + d.Score); // Debug.Log(f.Name);
             }
         });
         //吐丝 //已完成
