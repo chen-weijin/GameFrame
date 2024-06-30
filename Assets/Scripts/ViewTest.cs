@@ -48,15 +48,23 @@ public class ViewTest : MonoBehaviour
             string str = CacheMgr.GetInstance().GetItem("test");
             Debug.Log(str);
         });
+        _CreateTestBtn("读csv数据", () => {
+            var data = TableMgr.GetInstance().PlayerData;
+            for(var i = 0; i < data.Count; i++)
+            {
+                var d = data[i];
+                Debug.Log("属性: "+d.Name+"__" +d.Age + "__" + d.Score; // Debug.Log(f.Name);
+            }
+        });
         //吐丝 //已完成
         //事件机制 //已完成
         //弹窗 //已完成
+        //音效 //已完成
+        //本地缓存 //已完成
+        //数值配置 //已完成
         //列表
         //网络
 
-        //音效 //已完成
-        //数值配置
-        //本地缓存 //已完成
     }
 
 }

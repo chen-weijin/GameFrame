@@ -18,7 +18,6 @@ public class Main : MonoBehaviour
     void Start()
     {
         GameUIMgr.Instance.ViewTest();
-
     }
 
 }
