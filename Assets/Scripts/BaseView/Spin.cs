@@ -24,7 +24,7 @@ public class Spin : MonoBehaviour
     public void Show()
     {
         gameObject.GetRectTransform().BeginAction()
-            .DelayTime(3)
+            .DelayTime(4)
             .CallFunc(() => {
                 Destroy(gameObject);
             })

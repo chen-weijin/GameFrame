@@ -17,7 +17,7 @@ public class TableMgr
     public TableMgr()
     {
         TextAsset testCsv = (TextAsset)Resources.Load("data/test");
-        var testData = CSVReader.ReadCSV<PlayerData>(testCsv.text);
+        _playerData = CSVReader.ReadCSV<PlayerData>(testCsv.text);
     }
 
 
