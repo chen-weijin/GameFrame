@@ -64,6 +64,10 @@ public class ViewTest : MonoBehaviour
         //数值配置 //已完成
         //列表
         //网络
+        //微信登陆
+        //登陆界面
+        //资源加载界面
+
 
     }
 
