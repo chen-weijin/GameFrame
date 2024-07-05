@@ -38,6 +38,9 @@ public class ViewTest : MonoBehaviour
         _CreateTestBtn("µ¯´°", () => {
             GameUIMgr.Instance.PopNormal();
         });
+        _CreateTestBtn("ÌáÊ¾´°", () => {
+            GameUIMgr.Instance.Tip();
+        });
         _CreateTestBtn("ÒôÐ§", () => {
             AudioMgr.Instance.PlayEffect("audio/effect/lineBomb2");
         });

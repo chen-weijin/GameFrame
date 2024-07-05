@@ -15,6 +15,7 @@ public class GameUIMgr : Singleton<GameUIMgr>
     {
         var mo = UIManager.CreateObject<Spin>();
         mo.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
+        UIManager.SetSortingOrder(mo, 300);
         mo.SetContent(content);
         mo.Show();
         return mo;
@@ -24,5 +25,12 @@ public class GameUIMgr : Singleton<GameUIMgr>
         var testView = UIManager.CreateEmptyLayer<ViewTest>();
         testView.SetParent(UIManager.GetRootCanvas(), false);
         UIManager.SetSortingOrder(testView, 10000);
+    }
+    public TipWin Tip()
+    {
+        var mo = UIManager.CreateObject<TipWin>();
+        mo.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
+        UIManager.SetSortingOrder(mo, 200);
+        return mo;
     }
 }
