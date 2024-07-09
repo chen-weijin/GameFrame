@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,16 +10,28 @@ public class TipWin : MonoBehaviour
 
     private void Start()
     {
-        var win = gameObject.FindInChildren("win"); 
-        if (Input.GetMouseButtonUp(0))
-        {
-            Vector2 pos = Input.mousePosition;
-            var localPos = gameObject.transform.InverseTransformPoint(pos);
+        var win = gameObject.FindInChildren("win");
+        //if (Input.GetMouseButtonUp(0))
+        //{
+            //Vector2 pos = Input.mousePosition;
+            //if (Input.touches.Length != 0)
+            //{
+            //    pos = Input.touches[0].position;
+            //    Debug.Log("touch::::::::");
+            //}
+
+            //var localPos = gameObject.transform.InverseTransformPoint(pos);
             //Debug.Log("screen w:" + Screen.width + ", h:" + Screen.height);
             //Debug.Log("click pos x:" + pos.x + ",pos y:" + pos.y);
             //Debug.Log("click localPos x:" + localPos.x + ",pos y:" + localPos.y);
-            _SetWinPosition(localPos);
-        }
+            //GameUIMgr.Instance.Spin("click pos x:" + pos.x + ",pos y:" + pos.y);
+            //_SetWinPosition(localPos);
+        //}
+
+        Vector2 pos = Input.mousePosition;
+        var localPos = gameObject.transform.InverseTransformPoint(pos);
+        _SetWinPosition(localPos);
+
         gameObject.FindInChildren("bg").GetComponent<Button>().onClick.AddListener(() =>
         {
             Destroy(gameObject);

@@ -1,5 +1,4 @@
-﻿using PlasticGui.Configuration.CloudEdition.Welcome;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using WeChatWASM;
 
