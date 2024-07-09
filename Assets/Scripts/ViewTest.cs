@@ -4,10 +4,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using WeChatWASM;
 using WLMain;
 
 public class ViewTest : MonoBehaviour
 {
+
     private int _index = 0;
     private void _CreateTestBtn(string name,Action act)
     {
@@ -59,15 +62,28 @@ public class ViewTest : MonoBehaviour
                 Debug.Log("属性: "+d.Name+"__" +d.Age + "__" + d.Score); // Debug.Log(f.Name);
             }
         });
+
+        _CreateTestBtn("进入大厅", () => {
+            SceneManager.LoadScene("Lobby");
+        });
+
+        //_CreateTestBtn("微信登陆", () => {
+        //});
+        //_CreateTestBtn("微信授权", () => {
+        //});
+        //_CreateTestBtn("获取用户信息", () => {
+        //});
+
         //吐丝 //已完成
         //事件机制 //已完成
         //弹窗 //已完成
+        //提示窗 //已完成
         //音效 //已完成
         //本地缓存 //已完成
         //数值配置 //已完成
         //列表
         //网络
-        //微信登陆
+        //微信登陆 //已完成
         //登陆界面
         //资源加载界面
 
