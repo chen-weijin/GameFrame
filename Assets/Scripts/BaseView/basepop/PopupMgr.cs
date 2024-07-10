@@ -45,7 +45,7 @@ public class PopupMgr : Singleton<PopupMgr>
     /// </summary>
     public void PullAll()
     {
-        _black.DestroyMe();
+        if (_black) _black.DestroyMe();
         _black = null;
 
         for (var i = 0; i < _list.Count; i++)
@@ -62,7 +62,7 @@ public class PopupMgr : Singleton<PopupMgr>
         //ДІРэекеж
         if(_list.Count == 0)
         {
-            _black.DestroyMe();
+            if(_black) _black.DestroyMe();
             _black = null;
         }
         else

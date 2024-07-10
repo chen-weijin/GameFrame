@@ -84,7 +84,7 @@ public class ViewTest : MonoBehaviour
         //列表
         //网络
         //微信登陆 //已完成
-        //登陆界面
+        //登陆界面 //已完成
         //资源加载界面
 
 

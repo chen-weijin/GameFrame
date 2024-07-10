@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using WeChatWASM;
 
 public class WXPlatform
 {
-    public static void Login()
+    public static void Login(Action<string> act)
     {
         LoginOption info = new LoginOption();
         info.complete = (aa) => { /*登录完成处理,成功失败都会调*/ };
@@ -14,6 +15,7 @@ public class WXPlatform
             //登录成功处理
             Debug.Log("__OnLogin success登陆成功!查看Code：" + aa.code);
             //登录成功...这完成后，跳到下一步，《二、查看授权》
+            act(aa.code);
         };
 
         WXSDKManagerHandler.Instance.Login(info);
