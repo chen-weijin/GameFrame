@@ -87,6 +87,7 @@ public class ViewTest : MonoBehaviour
         //微信登陆 //已完成
         //登陆界面 //已完成
         //资源加载界面
+        //protobuf 
 
 
     }
