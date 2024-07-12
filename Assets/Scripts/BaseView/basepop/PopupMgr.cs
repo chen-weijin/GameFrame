@@ -40,6 +40,10 @@ public class PopupMgr : Singleton<PopupMgr>
         if (_list[_list.Count - 1].CloseType == 0) return;
         Pull();
     }
+    public void OpenNetWindow()
+    {
+
+    }
     /// <summary>
     /// 关闭所有窗口
     /// </summary>

@@ -1,5 +1,6 @@
 using framework;
 using UnityEngine;
+using static Codice.CM.WorkspaceServer.WorkspaceTreeDataStore;
 
 public class GameUIMgr : Singleton<GameUIMgr>
 {
@@ -33,4 +34,19 @@ public class GameUIMgr : Singleton<GameUIMgr>
         UIManager.SetSortingOrder(mo, 200);
         return mo;
     }
+    //public void NetClose()
+    //{
+    //    var mo = UIManager.CreateLayer<PopupNet>();
+    //    mo.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
+    //    UIManager.SetSortingOrder(mo, 400);
+    //    mo.SetTitle("ÍøÂç´íÎó");
+    //    mo.SetContent("ÍøÂç´íÎó");
+    //    mo.SetSubmitHandle(() =>{ 
+            
+    //    });
+    //    mo.SetCancleHandle(() => {
+            
+    //    });
+
+    //}
 }

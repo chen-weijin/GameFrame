@@ -21,8 +21,9 @@ public class LobbyView : BaseView
     //        "青青子衿，悠悠我心",
     //        "瓜田不纳履，李下不正冠"
     //    };
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         GameUIMgr.Instance.ViewTest();
         _InitList();
     }

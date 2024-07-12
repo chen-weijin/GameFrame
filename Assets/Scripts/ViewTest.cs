@@ -12,6 +12,7 @@ public class ViewTest : MonoBehaviour
 {
 
     private int _index = 0;
+    private NetSocket _socket;
     private void _CreateTestBtn(string name,Action act)
     {
         var btn = UIManager.CreateObject<XTestButton>();
@@ -63,9 +64,21 @@ public class ViewTest : MonoBehaviour
             }
         });
 
-        _CreateTestBtn("进入大厅", () => {
-            SceneManager.LoadScene("Lobby");
+        _CreateTestBtn("进入登陆界面", () => {
+            SceneManager.LoadScene("Login");
         });
+
+        _CreateTestBtn("连接socket", () => {
+            _socket = new NetSocket();
+            _socket.InitSocket();
+        });
+
+        _CreateTestBtn("发送消息", () => {
+            _socket.SendData("HelloWorld!!!");
+        });
+
+
+
 
         //_CreateTestBtn("微信登陆", () => {
         //});
@@ -82,12 +95,12 @@ public class ViewTest : MonoBehaviour
         //本地缓存 //已完成
         //数值配置 //已完成
         //纵向无线列表//已完成
-        //纵向网格无线列表
-        //网络
         //微信登陆 //已完成
         //登陆界面 //已完成
+        //protobuf  //已完成
+        //网络
+        //纵向网格无线列表
         //资源加载界面
-        //protobuf 
 
 
     }
