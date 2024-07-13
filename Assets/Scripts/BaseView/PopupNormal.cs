@@ -6,21 +6,36 @@ public class PopupNormal : PopupBase
 {
     public const string Prefab_Path = "prefabs/panel_normal";
 
-    //public static PopupNormal Create()
-    //{
-    //    var mo = UIManager.CreateLayer<PopupNormal>();
-    //    PopupMgr.Instance.Push(mo);
-    //    mo.CloseType = 0;
-    //    mo.HideType = 0;
-    //    return mo;
-    //}
-
+    private Action _submitHandle;
+    private Action _cancelHandle;
     protected override void Start()
     {
         base.Start();
-        gameObject.FindInChildren("btn_close").GetComponent<Button>().onClick.AddListener(_Close);
-        gameObject.FindInChildren("btn_cancel").GetComponent<Button>().onClick.AddListener(_Close);
-        gameObject.FindInChildren("btn_submit").GetComponent<Button>().onClick.AddListener(_Close);
+        gameObject.FindInChildren("btn_close").GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (_cancelHandle != null)
+            {
+                _cancelHandle();
+            }
+            _cancelHandle();
+            _Close();
+        });
+        gameObject.FindInChildren("btn_cancel").GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (_cancelHandle != null)
+            {
+                _cancelHandle();
+            }
+            _Close();
+        });
+        gameObject.FindInChildren("btn_submit").GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (_submitHandle != null)
+            {
+                _submitHandle();
+            }
+            _Close();
+        });
     }
     public void SetTitle(string title)
     {
@@ -32,10 +47,10 @@ public class PopupNormal : PopupBase
     }
     public void SetSubmitHandle(Action act)
     {
-
+        _submitHandle = act;
     }
     public void SetCancelHandle(Action act)
     {
-
+        _cancelHandle = act;
     }
 }

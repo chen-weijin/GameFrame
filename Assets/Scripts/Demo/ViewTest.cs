@@ -98,6 +98,8 @@ public class ViewTest : MonoBehaviour
         //微信登陆 //已完成
         //登陆界面 //已完成
         //protobuf  //已完成
+        //websocket框架嵌入 //已完成
+        //websocket重构 
         //网络
         //纵向网格无线列表
         //资源加载界面

@@ -1,6 +1,5 @@
 using framework;
 using UnityEngine;
-using static Codice.CM.WorkspaceServer.WorkspaceTreeDataStore;
 
 public class GameUIMgr : Singleton<GameUIMgr>
 {
@@ -12,9 +11,9 @@ public class GameUIMgr : Singleton<GameUIMgr>
         mo.HideType = 0;
         return mo;
     }
-    public Spin Spin(string content)
+    public SpinNormal Spin(string content)
     {
-        var mo = UIManager.CreateObject<Spin>();
+        var mo = UIManager.CreateObject<SpinNormal>();
         mo.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
         UIManager.SetSortingOrder(mo, 300);
         mo.SetContent(content);
@@ -27,9 +26,9 @@ public class GameUIMgr : Singleton<GameUIMgr>
         testView.SetParent(UIManager.GetRootCanvas(), false);
         UIManager.SetSortingOrder(testView, 10000);
     }
-    public TipWin Tip()
+    public TipNormal Tip()
     {
-        var mo = UIManager.CreateObject<TipWin>();
+        var mo = UIManager.CreateObject<TipNormal>();
         mo.GetComponent<RectTransform>().SetParent(UIManager.GetRootCanvas(), false);
         UIManager.SetSortingOrder(mo, 200);
         return mo;
