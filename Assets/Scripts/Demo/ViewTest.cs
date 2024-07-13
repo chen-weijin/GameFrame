@@ -1,8 +1,7 @@
 using framework;
 using game;
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using TestGoogleProtoBuff;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WeChatWASM;
@@ -63,18 +62,47 @@ public class ViewTest : MonoBehaviour
                 Debug.Log("属性: "+d.Name+"__" +d.Age + "__" + d.Score); // Debug.Log(f.Name);
             }
         });
+        _CreateTestBtn("proto压缩数据", () => {
+            //personInfo info = new personInfo();
+            //info.Name = "ys";
+            //info.Age = 50;
+            //info.Money = 9999;
+            //info.Phone.Add(new personInfo.Types.PhoneNumber { Number = "12123", Type = PhoneType.Home });
+            //byte[] msg = ProtoBufffer.Serialize(info);
+            //Debug.Log(msg.Length);
+
+            //personInfo deinfo = ProtoBufffer.DeSerialize<personInfo>(msg);
+            //Debug.Log("姓名：" + deinfo.Name);
+            //Debug.Log("年龄：" + deinfo.Age);
+            //Debug.Log("资产：" + deinfo.Money);
+            //Debug.Log($"{deinfo.Phone[0].Type}的电话号：{deinfo.Phone[0].Number}");
+            //MainMessage msg = new MainMessage();
+            //msg.Type = MessageId.MessageTypeAId;
+            //msg.MessageA = new MessageTypeA();
+            //msg.MessageA.ContentA = "hahhaha";
+
+        });
+        _CreateTestBtn("proto解压数据", () => {
+        });
 
         _CreateTestBtn("进入登陆界面", () => {
             SceneManager.LoadScene("Login");
         });
 
-        _CreateTestBtn("连接socket", () => {
-            _socket = new NetSocket();
-            _socket.InitSocket();
-        });
+        //_CreateTestBtn("连接socket", () => {
+        //    _socket = new NetSocket();
+        //    _socket.InitSocket();
+        //});
 
-        _CreateTestBtn("发送消息", () => {
-            _socket.SendData("HelloWorld!!!");
+        _CreateTestBtn("发送protoA", () => {
+            var data = new MessageTypeA();
+            data.ContentA = "hahahahahah!!";
+            MessageMgr.Instance.SendData(data);
+        });
+        _CreateTestBtn("发送protoV", () => {
+            var data = new MessageTypeB();
+            data.NumberB = 12345;
+            MessageMgr.Instance.SendData(data);
         });
 
 

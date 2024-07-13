@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TestGoogleProtoBuff;
 using UnityEngine;
 using UnityWebSocket;
 
@@ -63,7 +64,7 @@ public class WebSocketMgr : MonoBehaviour
     private int receiveCount;
 
     #region 事件
-    private Dictionary<uint, Action<UnityEngine.Object>> _dictMsgHandlerType = new Dictionary<uint, Action<UnityEngine.Object>>();
+    private Dictionary<uint, Action<EventArgs>> _dictMsgHandlerType = new Dictionary<uint, Action<EventArgs>>();
 
     /// <summary>
     /// 添加消息处理类型
@@ -72,7 +73,7 @@ public class WebSocketMgr : MonoBehaviour
     /// <param name="recvMsgId"></param>
     /// <param name="cb"></param>
     /// <returns></returns>
-    public void AddMsgHandler(uint recvMsgId, Action<UnityEngine.Object> cb)
+    public void AddMsgHandler(uint recvMsgId, Action<EventArgs> cb)
     {
         _dictMsgHandlerType[recvMsgId] = cb;
     }
@@ -80,14 +81,20 @@ public class WebSocketMgr : MonoBehaviour
     {
         _dictMsgHandlerType.Remove(recvMsgId);
     }
-    public void PoseMsg(uint recvMsgId, UnityEngine.Object ob)
+    public void PostNetWork(uint netId, EventArgs ob)
     {
-        _dictMsgHandlerType.TryGetValue(recvMsgId, out Action<UnityEngine.Object> cb);
+        
+        _dictMsgHandlerType.TryGetValue(netId, out Action<EventArgs> cb);
         if(cb != null)
         {
             cb(ob);
         }
     }
+    public void PostMsg(MessageId recvMsgId, string msg)
+    {
+
+    }
+
     #endregion
 
     public void InitSocket()
@@ -106,7 +113,7 @@ public class WebSocketMgr : MonoBehaviour
     private void Socket_OnOpen(object sender, OpenEventArgs e)
     {
         Debug.Log(string.Format("Connected: {0}", address));
-        PoseMsg(EVENT_OPEN_WEBSECKET, null);
+        PostNetWork(EVENT_OPEN_WEBSECKET, null);
     }
 
     private void Socket_OnMessage(object sender, MessageEventArgs e)
@@ -120,19 +127,21 @@ public class WebSocketMgr : MonoBehaviour
             Debug.Log(string.Format("Receive: {0}", e.Data));
         }
         receiveCount += 1;
-        PoseMsg(EVENT_MESSAGE_WEBSECKET, null);
+        PostNetWork(EVENT_MESSAGE_WEBSECKET, e);
+
+        MessageMgr.Instance.PostMsg(e);
     }
 
     private void Socket_OnClose(object sender, CloseEventArgs e)
     {
         Debug.Log(string.Format("Closed: StatusCode: {0}, Reason: {1}", e.StatusCode, e.Reason));
-        PoseMsg(EVENT_CLOSE_WEBSECKET, null);
+        PostNetWork(EVENT_CLOSE_WEBSECKET, e);
     }
 
     private void Socket_OnError(object sender, ErrorEventArgs e)
     {
         Debug.Log(string.Format("Error: {0}", e.Message));
-        PoseMsg(EVENT_ERROR_WEBSECKET, null);
+        PostNetWork(EVENT_ERROR_WEBSECKET, e);
     }
 
     // 其他公共或受保护的方法，用于发送消息、接收消息等...  
@@ -141,19 +150,27 @@ public class WebSocketMgr : MonoBehaviour
         WebSocketState state = _webSocketClient == null ? WebSocketState.Closed : _webSocketClient.ReadyState;
         return state;
     }
-    public void SendData(string sendText)
+    public void SendByte(byte[] data)
     {
         if (GetSocketState() != WebSocketState.Open) return;
-        _webSocketClient.SendAsync(sendText);
-        Debug.Log(string.Format("Send: {0}", sendText));
+        _webSocketClient.SendAsync(data);
+        Debug.Log(string.Format("Send Bytes ({1}): {0}", data, data.Length));
         sendCount += 1;
     }
-    public void SendData2(string sendText)
-    {
-        if (GetSocketState() != WebSocketState.Open) return;
-        var bytes = System.Text.Encoding.UTF8.GetBytes(sendText);
-        _webSocketClient.SendAsync(bytes);
-        Debug.Log(string.Format("Send Bytes ({1}): {0}", sendText, bytes.Length));
-        sendCount += 1;
-    }
+
+    //public void SendData(string sendText)
+    //{
+    //    if (GetSocketState() != WebSocketState.Open) return;
+    //    _webSocketClient.SendAsync(sendText);
+    //    Debug.Log(string.Format("Send: {0}", sendText));
+    //    sendCount += 1;
+    //}
+    //public void SendData2(string sendText)
+    //{
+    //    if (GetSocketState() != WebSocketState.Open) return;
+    //    var bytes = System.Text.Encoding.UTF8.GetBytes(sendText);
+    //    _webSocketClient.SendAsync(bytes);
+    //    Debug.Log(string.Format("Send Bytes ({1}): {0}", sendText, bytes.Length));
+    //    sendCount += 1;
+    //}
 }

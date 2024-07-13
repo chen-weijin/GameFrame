@@ -1,3 +1,3 @@
-protoc.exe --proto_path ./input Person.proto Person2.proto --csharp_out=./output/
+protoc.exe --proto_path ./input Message.proto --csharp_out=../Assets/Scripts/Net/
 echo Exprot Successed!
 pause
