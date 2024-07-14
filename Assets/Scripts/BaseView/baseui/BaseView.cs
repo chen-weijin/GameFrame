@@ -14,8 +14,8 @@ public class BaseView : MonoBehaviour
         WebSocketMgr.Instance.AddMsgHandler(WebSocketMgr.EVENT_OPEN_WEBSECKET, _OpenSocket);
         WebSocketMgr.Instance.AddMsgHandler(WebSocketMgr.EVENT_CLOSE_WEBSECKET, _CloseSocket);
         WebSocketMgr.Instance.AddMsgHandler(WebSocketMgr.EVENT_ERROR_WEBSECKET, _ErrorSocket);
-        MessageMgr.Instance.AddLis<MessageTypeA>(MessageAHandle);
-        MessageMgr.Instance.AddLis<MessageTypeB>(MessageBHandle);
+        WebSocketMgr.Instance.AddLis<MessageTypeA>(MessageAHandle);
+        WebSocketMgr.Instance.AddLis<MessageTypeB>(MessageBHandle);
     }
     private void MessageAHandle(MessageTypeA msg)
     {
@@ -37,8 +37,8 @@ public class BaseView : MonoBehaviour
         WebSocketMgr.Instance.RemoveMsgHandler(WebSocketMgr.EVENT_OPEN_WEBSECKET);
         WebSocketMgr.Instance.RemoveMsgHandler(WebSocketMgr.EVENT_CLOSE_WEBSECKET);
         WebSocketMgr.Instance.RemoveMsgHandler(WebSocketMgr.EVENT_ERROR_WEBSECKET);
-        MessageMgr.Instance.RemoveLis<MessageTypeA>(MessageAHandle);
-        MessageMgr.Instance.RemoveLis<MessageTypeB>(MessageBHandle);
+        WebSocketMgr.Instance.RemoveLis<MessageTypeA>(MessageAHandle);
+        WebSocketMgr.Instance.RemoveLis<MessageTypeB>(MessageBHandle);
     }
 
     protected void Login()

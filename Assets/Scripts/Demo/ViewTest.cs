@@ -11,7 +11,6 @@ public class ViewTest : MonoBehaviour
 {
 
     private int _index = 0;
-    private NetSocket _socket;
     private void _CreateTestBtn(string name,Action act)
     {
         var btn = UIManager.CreateObject<XTestButton>();
@@ -97,12 +96,12 @@ public class ViewTest : MonoBehaviour
         _CreateTestBtn("·¢ËÍprotoA", () => {
             var data = new MessageTypeA();
             data.ContentA = "hahahahahah!!";
-            MessageMgr.Instance.SendData(data);
+            WebSocketMgr.Instance.SendData(data);
         });
         _CreateTestBtn("·¢ËÍprotoV", () => {
             var data = new MessageTypeB();
             data.NumberB = 12345;
-            MessageMgr.Instance.SendData(data);
+            WebSocketMgr.Instance.SendData(data);
         });
 
 

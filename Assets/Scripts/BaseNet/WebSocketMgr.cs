@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TestGoogleProtoBuff;
 using UnityEngine;
 using UnityWebSocket;
+using WLMain;
 
 public class WebSocketMgr : MonoBehaviour
 {
@@ -129,7 +130,9 @@ public class WebSocketMgr : MonoBehaviour
         receiveCount += 1;
         PostNetWork(EVENT_MESSAGE_WEBSECKET, e);
 
-        MessageMgr.Instance.PostMsg(e);
+        MainMessage mainMsg = ProtoBufffer.DeSerialize<MainMessage>(e.RawData);
+        var id = _GetKey(mainMsg.Type);
+        _handle.PostMsg(id,mainMsg);
     }
 
     private void Socket_OnClose(object sender, CloseEventArgs e)
@@ -173,4 +176,46 @@ public class WebSocketMgr : MonoBehaviour
     //    Debug.Log(string.Format("Send Bytes ({1}): {0}", sendText, bytes.Length));
     //    sendCount += 1;
     //}
+
+    #region Message
+    private IMessageHandle _handle;
+    public void SetHandle(IMessageHandle handle)
+    {
+        _handle = handle;
+    }
+
+    private string _GetKey<T>()
+    {
+        var id = _handle.GetMessageIdByType<T>();
+        return _GetKey(id);
+    }
+    private string _GetKey(MessageId id)
+    {
+        return "MSG_" + id;
+    }
+
+    public void AddLis<T>(Action<T> act)
+    {
+        Ntfy.Instance.Add(_GetKey<T>(), act);
+    }
+    public void RemoveLis<T>(Action<T> act)
+    {
+        Ntfy.Instance.Remove(_GetKey<T>(), act);
+    }
+
+    public void SendData<T>(T t)
+    {
+        MainMessage mainMsg = _handle.GetMainMsg(t);
+        byte[] data = ProtoBufffer.Serialize(mainMsg);
+        WebSocketMgr.Instance.SendByte(data);
+    }
+    #endregion
+}
+
+
+public interface IMessageHandle
+{
+    public MessageId GetMessageIdByType<T>();
+    public MainMessage GetMainMsg<T>(T t);
+    public void PostMsg(string id, MainMessage mainMsg);
 }

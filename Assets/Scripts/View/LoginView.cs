@@ -1,13 +1,11 @@
 ﻿using framework;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoginView : BaseView
 {
     protected override void Start()
     {
+        WebSocketMgr.Instance.SetHandle(new MessageHandle());
         base.Start();
         UIManager.GetRootCanvas().gameObject.FindInChildren("btn_start").GetComponent<Button>().onClick.AddListener(() =>
         {
