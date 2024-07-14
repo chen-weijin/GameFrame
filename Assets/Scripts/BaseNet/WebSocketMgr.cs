@@ -6,55 +6,8 @@ using UnityEngine;
 using UnityWebSocket;
 using framework;
 
-public class WebSocketMgr : MonoBehaviour
+public class WebSocketMgr : SingletonMono<WebSocketMgr>
 {
-    #region 单例
-    private const string rootName = "[WebSocketMgr]";
-    private static WebSocketMgr _instance;
-
-    public static WebSocketMgr Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                // 这里通常会在游戏开始时自动创建单例，或者你可以手动创建  
-                // 为了简化，这里我们假设已经有一个活跃的 GameObject 来挂载这个脚本  
-                // 在实际应用中，你可能需要在 Awake 或 Start 方法中检查 _instance 是否为 null  
-                GameObject obj = new GameObject("WebSocketMgr");
-                _instance = obj.AddComponent<WebSocketMgr>();
-                DontDestroyOnLoad(obj); // 确保这个 GameObject 在加载新场景时不会被销毁  
-            }
-            return _instance;
-        }
-    }
-    private void Awake()
-    {
-        // 检查是否已经是单例，如果不是则销毁自己  
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        _instance = this;
-
-        // 初始化 WebSocketClient  
-        // 连接 WebSocket 服务器等...  
-    }
-
-    // WebSocket 的其他管理方法...  
-
-    // 确保在不需要 WebSocket 连接时能够正确关闭和清理资源  
-    private void OnDestroy()
-    {
-        if (_webSocketClient != null)
-        {
-            _webSocketClient.CloseAsync(); // 假设 WebSocketClient 有 Close 方法来关闭连接  
-        }
-    }
-    #endregion
-
 
     private WebSocket _webSocketClient;
     public string address = "ws://localhost:8765";
@@ -72,6 +25,13 @@ public class WebSocketMgr : MonoBehaviour
         _webSocketClient.OnError += Socket_OnError;
         Debug.Log(string.Format("Connecting..."));
         _webSocketClient.ConnectAsync();
+    }
+    private void OnDestroy()
+    {
+        if (_webSocketClient != null)
+        {
+            _webSocketClient.CloseAsync(); // 假设 WebSocketClient 有 Close 方法来关闭连接  
+        }
     }
 
     public WebSocketState GetSocketState()
