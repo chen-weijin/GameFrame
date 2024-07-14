@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TestGoogleProtoBuff;
 using UnityEngine;
 using UnityWebSocket;
-using WLMain;
+using framework;
 
 public class WebSocketMgr : MonoBehaviour
 {

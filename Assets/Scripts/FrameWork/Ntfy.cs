@@ -1,9 +1,8 @@
-﻿using framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WLMain
+namespace framework
 {
     /// <summary>
     /// czw - 简单事件处理

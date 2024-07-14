@@ -5,7 +5,7 @@ using TestGoogleProtoBuff;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WeChatWASM;
-using WLMain;
+using framework;
 
 public class ViewTest : MonoBehaviour
 {

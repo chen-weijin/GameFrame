@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using TestGoogleProtoBuff;
-using WLMain;
+using framework;
 
 public class MessageHandle : IMessageHandle
 {
