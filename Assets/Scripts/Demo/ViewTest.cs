@@ -128,6 +128,7 @@ public class ViewTest : MonoBehaviour
         //websocket框架嵌入 //已完成
         //websocket重构  //已完成
         //网络 //已完成
+        //数据层
         //纵向网格无线列表
         //资源加载界面
 
