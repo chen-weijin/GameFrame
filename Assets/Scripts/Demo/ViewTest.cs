@@ -104,6 +104,10 @@ public class ViewTest : MonoBehaviour
             WebSocketMgr.Instance.SendData(data);
         });
 
+        _CreateTestBtn("排行榜", () => {
+            SceneManager.LoadScene("Rank");
+        });
+
 
 
 
@@ -131,8 +135,9 @@ public class ViewTest : MonoBehaviour
         //数据层 //已完成
         //纵向网格无线列表
         //资源加载
-        //资源加载界面
+        //资源加载界面 
         //登陆流程
+        //微信排行榜
 
 
 
