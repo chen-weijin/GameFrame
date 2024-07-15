@@ -3,6 +3,15 @@ using TestGoogleProtoBuff;
 
 public class MessageMgr :Singleton<MessageMgr>
 {
+
+    //protected override void Awake()
+    //{
+    //    base.Awake();
+    //    WebSocketMgr.Instance.AddLis<MessageTypeA>(MessageTypeA);
+    //    WebSocketMgr.Instance.AddLis<MessageTypeB>(MessageTypeB);
+    //}
+
+
     protected override void Init()
     {
         base.Init();
