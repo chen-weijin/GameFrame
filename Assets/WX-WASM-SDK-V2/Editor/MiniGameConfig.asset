@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MiniGameConfig
   m_EditorClassIdentifier: 
   ProjectConf:
-    projectName: test
+    projectName: "\u6D4B\u8BD5"
     Appid: wxf67531bdf3d328af
     CDN: https://7072-prod-2gneo2k5fa9692f8-1327522290.tcb.qcloud.la/webgl/
     assetLoadType: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
     enableRenderAnalysis: 0
     iOSAutoGCInterval: 10000
     enableIOSPerformancePlus: 0
-    brotliMT: 1
+    brotliMT: 0
   CompressTexture:
     halfSize: 0
     useDXT5: 0
