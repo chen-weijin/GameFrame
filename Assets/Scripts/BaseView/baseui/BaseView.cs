@@ -4,13 +4,16 @@ using System.Collections;
 using TestGoogleProtoBuff;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityWebSocket;
+using WeChatWASM;
 
 public class BaseView : MonoBehaviour
 {
     // Use this for initialization
     protected virtual void Start()
     {
+        _InitText();
         WebSocketMgr.Instance.AddMsgHandler(WebSocketMgr.EVENT_OPEN_WEBSECKET, _OpenSocket);
         WebSocketMgr.Instance.AddMsgHandler(WebSocketMgr.EVENT_CLOSE_WEBSECKET, _CloseSocket);
         WebSocketMgr.Instance.AddMsgHandler(WebSocketMgr.EVENT_ERROR_WEBSECKET, _ErrorSocket);
@@ -87,6 +90,25 @@ public class BaseView : MonoBehaviour
             }
             Destroy(_popNet.gameObject);
             _popNet = null;
+        });
+    }
+    protected void _InitText()
+    {
+        WX.GetWXFont("https://7072-prod-2gneo2k5fa9692f8-1327522290.tcb.qcloud.la/webgl/font.otf", (font) =>
+        {
+
+            // 遍历场景中的所有物体
+            foreach (var obj in FindObjectsOfType<GameObject>())
+            {
+                // 获取每个物体上的 Text 组件
+                Text textComponent = obj.GetComponent<Text>();
+                if (textComponent != null)
+                {
+                    // 在这里对获取到的 Text 组件进行操作
+                    Debug.Log("找到 Text 组件: " + textComponent.name);
+                    textComponent.font = font;
+                }
+            }
         });
     }
 }

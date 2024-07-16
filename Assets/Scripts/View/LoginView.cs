@@ -1,5 +1,7 @@
 ﻿using framework;
+using UnityEngine;
 using UnityEngine.UI;
+using WeChatWASM;
 
 public class LoginView : BaseView
 {
