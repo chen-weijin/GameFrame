@@ -4,8 +4,7 @@ using System;
 using TestGoogleProtoBuff;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using WeChatWASM;
-using framework;
+//using WeChatWASM;
 
 public class ViewTest : MonoBehaviour
 {
