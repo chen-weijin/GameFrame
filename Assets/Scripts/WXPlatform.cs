@@ -17,8 +17,8 @@ public class WXPlatform
             //登录成功...这完成后，跳到下一步，《二、查看授权》
             act(aa.code);
         };
-
-        WXSDKManagerHandler.Instance.Login(info);
+        
+        WX.Login(info);
     }
 
     public static void GetSetting()
@@ -39,7 +39,7 @@ public class WXPlatform
                 Debug.Log("《四、获取用户信息》:");
             }
         };
-        WXSDKManagerHandler.Instance.GetSetting(info);
+        WX.GetSetting(info);
     }
     public static void GetUserInfo()
     {
@@ -58,14 +58,14 @@ public class WXPlatform
 
             }
         };
-        WXSDKManagerHandler.Instance.GetUserInfo(userInfo);
+        WX.GetUserInfo(userInfo);
     }
 
     public static void GetUserInfoBtn()
     {
 
         //调用请求获取用户信息
-        WXUserInfoButton btn = WXSDKManagerHandler.Instance.CreateUserInfoButton(0, 0, Screen.width, Screen.height, "zh_CN", true);
+        WXUserInfoButton btn = WX.CreateUserInfoButton(0, 0, Screen.width, Screen.height, "zh_CN", true);
         btn.OnTap((res) =>
         {
             if (res.errCode == 0)

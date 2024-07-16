@@ -45,7 +45,6 @@ public class Ranking : MonoBehaviour
             withShareTicket = true,
             isPrivateMessage = true,
         });
-
         /**
          * 群排行榜功能需要配合 WX.OnShow 来使用，整体流程为：
          * 1. WX.UpdateShareMenu 分享功能；
