@@ -137,6 +137,9 @@ public class ViewTest : MonoBehaviour
         //资源加载界面 
         //登陆流程
         //微信排行榜
+        //红点系统
+        //新手引导
+
 
 
 

@@ -94,21 +94,26 @@ public class BaseView : MonoBehaviour
     }
     protected void _InitText()
     {
-        WX.GetWXFont("https://7072-prod-2gneo2k5fa9692f8-1327522290.tcb.qcloud.la/webgl/font.otf", (font) =>
-        {
+        WX.InitSDK((ret) => {
 
-            // 遍历场景中的所有物体
-            foreach (var obj in FindObjectsOfType<GameObject>())
+            WX.GetWXFont("https://7072-prod-2gneo2k5fa9692f8-1327522290.tcb.qcloud.la/webgl/font.otf", (font) =>
             {
-                // 获取每个物体上的 Text 组件
-                Text textComponent = obj.GetComponent<Text>();
-                if (textComponent != null)
+
+                // 遍历场景中的所有物体
+                foreach (var obj in FindObjectsOfType<GameObject>())
                 {
-                    // 在这里对获取到的 Text 组件进行操作
-                    Debug.Log("找到 Text 组件: " + textComponent.name);
-                    textComponent.font = font;
+                    // 获取每个物体上的 Text 组件
+                    Text textComponent = obj.GetComponent<Text>();
+                    if (textComponent != null)
+                    {
+                        // 在这里对获取到的 Text 组件进行操作
+                        Debug.Log("找到 Text 组件: " + textComponent.name);
+                        textComponent.font = font;
+                    }
                 }
-            }
+            });
+
         });
+
     }
 }

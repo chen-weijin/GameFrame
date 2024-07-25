@@ -22,14 +22,14 @@ public class PopupBase : MonoBehaviour
         if (_isShow == true) return;
         _isShow = true;
 
-        ShowAni();
+        _ShowAni();
     }
     public void Hide()
     {
         if (_isShow == false) return;
         _isShow = false;
 
-        HideAni();
+        _HideAni();
     }
     public void DestroyFlash()
     {
@@ -40,10 +40,11 @@ public class PopupBase : MonoBehaviour
         if (_isClose == true) return;
         _isClose = true;
 
-        HideAni(() =>
-        {
-            Destroy(gameObject);
-        });
+        Destroy(gameObject);
+        //HideAni(() =>
+        //{
+        //    Destroy(gameObject);
+        //});
     }
 
 
@@ -55,7 +56,7 @@ public class PopupBase : MonoBehaviour
     /// ÏÔÊ¾¶¯»­
     /// </summary>
     /// <param name="endAct"></param>
-    protected virtual void ShowAni(Action endAct = null)
+    protected virtual void _ShowAni(Action endAct = null)
     {
         gameObject.SetActive(true);
         gameObject.GetRectTransform().SetScale(0);
@@ -68,7 +69,7 @@ public class PopupBase : MonoBehaviour
     /// Òþ²Ø¶¯»­
     /// </summary>
     /// <param name="endAct"></param>
-    protected virtual void HideAni(Action endAct = null)
+    protected virtual void _HideAni(Action endAct = null)
     {
 
         gameObject.SetActive(true);

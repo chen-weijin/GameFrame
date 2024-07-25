@@ -10,8 +10,8 @@ public class WebSocketMgr : SingletonMono<WebSocketMgr>
 {
 
     private WebSocket _webSocketClient;
-    //public string address = "ws://172.20.40.214:80";
-    public string address = "ws://localhost:80";
+    public string address = "ws://172.20.40.214:8765";
+    //public string address = "ws://localhost:80";
     private int sendCount;
     private int receiveCount;
 
