@@ -41,3 +41,33 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 528312707
+    locked: 0
+  - name: Tree1
+    uniqueID: 2604185317
+    locked: 0
+  - name: Tree2
+    uniqueID: 3385788139
+    locked: 0
+  - name: Tree3
+    uniqueID: 1369441901
+    locked: 0
+  - name: Tree4
+    uniqueID: 1511226921
+    locked: 0
+  - name: Tree5
+    uniqueID: 1257305621
+    locked: 0
+  - name: Tree6
+    uniqueID: 1902847475
+    locked: 0
+  - name: House
+    uniqueID: 3848379289
+    locked: 0
+  - name: Person
+    uniqueID: 3679806749
+    locked: 0
+  - name: zk
+    uniqueID: 3433658763
+    locked: 0
